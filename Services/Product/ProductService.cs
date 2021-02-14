@@ -8,7 +8,7 @@ using DemoStandardProject.DTOs;
 using DemoStandardProject.Models.ServiceResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using DemoStandardProject.Models;
+using DemoStandardProject.Models.Products;
 
 namespace DemoStandardProject.Services
 {
@@ -86,8 +86,8 @@ namespace DemoStandardProject.Services
             ServiceResponse<ProductDto> response = new ServiceResponse<ProductDto>();
 
             Product product = await _db.Products
-            //.Include(c => c.ProductGroup)
-            // .Include(c => c.promotion)
+            .Include(c => c.ProductGroup)
+            .Include(c => c.Promotions)
             .FirstOrDefaultAsync(x => x.ProductId == Id);
 
             if (product == null)
@@ -102,11 +102,14 @@ namespace DemoStandardProject.Services
         public async Task<ServiceResponse<ProductDto>> UpdateProduct(UpdateProductDto updateProduct)
         {
             ServiceResponse<ProductDto> response = new ServiceResponse<ProductDto>();
-            Product product = await _db.Products.FirstOrDefaultAsync(x => x.ProductId == updateProduct.ProductId);
+            Product product = await _db.Products
+                                    .Include(x => x.ProductGroup)
+                                    .Include(x => x.Promotions)
+                                    .FirstOrDefaultAsync(x => x.ProductId == updateProduct.ProductId);
 
             if (product == null)
             {
-                //  response.IsSuccess = false;
+                // response.IsSuccess = false;
                 // response.Message = "ProductId not Found";
                 return ResponseResult.Failure<ProductDto>("ProductId not Found");
             }
@@ -120,7 +123,9 @@ namespace DemoStandardProject.Services
                 product.UpdateDate = DateTime.Now;
                 _db.Products.Update(product);
                 await _db.SaveChangesAsync();
+
                 response.Data = _mapper.Map<ProductDto>(product);
+
 
             }
             catch (Exception ex)

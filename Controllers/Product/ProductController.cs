@@ -7,7 +7,7 @@ using DemoStandardProject.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace DemoStandardProject.Controllers
+namespace DemoStandardProject.Controllers.Product
 {
     [ApiController]
     [Route("api/product/")]

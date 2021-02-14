@@ -14,8 +14,8 @@ namespace DemoStandardProject.DTOs
         public DateTime CreatedDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public bool IsActice { get; set; }
-        public int ProductGroupId { get; set; }
-        public int PromotionId { get; set; }
+        //  public int ProductGroupId { get; set; }
+        //  public int PromotionId { get; set; }
         public GetProductGroupName ProductGroup { get; set; }
         public GetPromotion Promotions { get; set; }
 

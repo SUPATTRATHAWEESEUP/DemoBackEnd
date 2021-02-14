@@ -54,6 +54,7 @@ namespace DemoStandardProject
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductGroupService, ProductGroupService>();
+            services.AddScoped<IProductStockLogService, ProductStockLogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

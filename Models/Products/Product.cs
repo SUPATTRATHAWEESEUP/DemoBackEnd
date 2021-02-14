@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using DemoStandardProject.DTOs;
 using DemoStandardProject.Models.Sales;
 
-namespace DemoStandardProject.Models
+
+namespace DemoStandardProject.Models.Products
 {
     [Table("Product")]
     public class Product
@@ -34,10 +34,12 @@ namespace DemoStandardProject.Models
 
         [ForeignKey(nameof(Promotions))]
         public int PromotionId { get; set; }
-        public ProductGroup ProductGroup { get; set; }
-        public Promotions Promotions { get; set; }
+        public virtual ProductGroup ProductGroup { get; set; }
+        public virtual Promotions Promotions { get; set; }
         public virtual ICollection<SalesDetail> SalesDetails { get; set; }
          = new HashSet<SalesDetail>();
+        public virtual ICollection<ProductStockLog> ProductStockLogs { get; set; }
+        = new HashSet<ProductStockLog>();
 
     }
 }

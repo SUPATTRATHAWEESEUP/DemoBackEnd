@@ -9,8 +9,8 @@ namespace DemoStandardProject.Services
     {
         Task<ServiceResponse<List<ProductGroupDto>>> GetProductGroup();
         Task<ServiceResponse<ProductGroupDto>> GetProductGroupById(int Id);
-        Task<ServiceResponse<List<ProductGroupDto>>> AddProductGroup(ProductGroupDto newproductgroup);
+        Task<ServiceResponse<List<ProductGroupDto>>> AddProductGroup(AddProductGroupDto newproductgroup);
         Task<ServiceResponse<List<ProductGroupDto>>> DelectProductGroup(int Id);
-
+        Task<ServiceResponse<ProductGroupDto>> UpdateProductGroup(UpdateProductGroupDto updateProductGroup);
     }
 }

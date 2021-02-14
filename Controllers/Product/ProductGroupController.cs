@@ -7,7 +7,7 @@ using DemoStandardProject.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace DemoStandardProject.Controllers
+namespace DemoStandardProject.Controllers.Product
 {
     [ApiController]
     [Route("api/productgroup/")]
@@ -36,7 +36,7 @@ namespace DemoStandardProject.Controllers
 
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddProductGroup(ProductGroupDto newproductgroup)
+        public async Task<IActionResult> AddProductGroup(AddProductGroupDto newproductgroup)
         {
             try
             {
@@ -64,6 +64,24 @@ namespace DemoStandardProject.Controllers
             catch (Exception)
             {
                 _logger.LogError("Failed to execute DELETE");
+                return BadRequest();
+            }
+        }
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateProductGroup(UpdateProductGroupDto update)
+        {
+            try
+            {
+                ServiceResponse<ProductGroupDto> res = await _productGroupService.UpdateProductGroup(update);
+                if (res.Data == null)
+                {
+                    return NotFound(res);
+                }
+                return Ok(res);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Failed to execute put");
                 return BadRequest();
             }
         }

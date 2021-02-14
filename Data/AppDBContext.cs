@@ -1,5 +1,5 @@
 using System;
-using DemoStandardProject.Models;
+using DemoStandardProject.Models.Products;
 using DemoStandardProject.Models.Sales;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +18,7 @@ namespace DemoStandardProject.Data
         public DbSet<SalesDetail> SalesDetails { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public Func<DateTime> Now { get; set; } = () => DateTime.Now;
-
+        public DbSet<ProductStockLog> ProductStockLogs { get; set; }
 
     }
 }
